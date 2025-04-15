@@ -17,9 +17,9 @@ int main(int argc, char *argv[]) {
     // Add double with -123.456 and print result
     while (std::getline(file, line)) 
     {
-        if(parse_number(line) != -7)
+        if(parse_number(line) != INVALID)
         {
-            std::cout << parse_number(line) << std::endl;
+            std::cout << parse_number(line) - 123.456 << std::endl;
         }
         else
         {

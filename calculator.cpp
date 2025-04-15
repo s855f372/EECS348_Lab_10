@@ -9,11 +9,17 @@ double parse_number(const std::string &expression)
     double decimal = 1.0;
     bool foundDecimal = false;
     double sign = 1.0;
+
+    // If the last character in the string is a decimal with no following points, it's invalid
+    if (expression[expression.length() - 1] == '.')
+    {
+        return INVALID;
+    }
     
     // If first character is not a digit, "-", or "+", it's invalid
     if (!(isDigit(expression[0])) && expression[0] != '-' && expression[0] != '+')
     {
-        return -7;
+        return INVALID;
     }
     else if (isDigit(expression[0]))
     {
@@ -23,17 +29,18 @@ double parse_number(const std::string &expression)
     {
         sign = -1.0;
     }
-
+    
     // Checks rest of string
     for (char c : expression.substr(1))
     {
+        
         // If character is a decimal
         if (c == '.')
         {
             // And there's already been a decimal, it's invalid
             if(foundDecimal)
             {
-                return -7;
+                return INVALID;
             }
             // Else it's the first decimal, continue
             else
@@ -62,7 +69,7 @@ double parse_number(const std::string &expression)
         // If the character is not a decimal or number, it's invalid
         else
         {
-            return -7;
+            return INVALID;
         }
     }
     
